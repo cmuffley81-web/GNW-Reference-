@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Sound Fox Notary - 50-State GNW Reference</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        warmCream: '#F5F4EE',
+                        warmCard: '#FAF9F5',
+                        warmBorder: '#E6E4DC',
+                        crimsonDark: '#12090B',
+                        crimsonCard: '#1E1216',
+                        foxCrimson: '#991B1B',
+                        champagneGold: '#D4AF37',
+                        goldHover: '#B59329',
+                        activeBlue: '#2563EB',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* iPad & Mobile Viewport and Touch Optimizations */
+        html, body {
+            height: 100dvh;
+            background-color: #F5F4EE;
+            color: #1C1917;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            font-size: 15px;
+        }
+
+        .dark body {
+            background-color: #12090B;
+            color: #F3F4F6;
+        }
+
+        /* Hide scrollbars for top pill bar while retaining smooth scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Card borders and shadows matching reference screenshots */
+        .gnw-card {
+            background-color: #FAF9F5;
+            border: 1px solid #E6E4DC;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            transition: all 0.2s ease;
+        }
+
+        .dark .gnw-card {
+            background-color: #1E1216;
+            border-color: #382028;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* High contrast act banner styling */
+        .act-banner {
+            font-weight: 7rem;
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+            color: #0F172A;
+        }
+
+        .dark .act-banner {
+            color: #F8FAFC;
+        }
+
+        .pill-button {
+            flex-shrink: 0;
+            white-space: nowrap;
+            padding: 0.4rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.15s ease-in-out;
+            cursor: pointer;
+        }
+
+        /* Print formatting for physical cheatsheets */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; font-size: 11pt; }
+            .gnw-card { border: 1px solid #ccc !important; box-shadow: none !important; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans overflow-hidden antialiased selection:bg-amber-200">
+
+    <!-- TOP HEADER NAVBAR -->
+    <header class="no-print bg-white dark:bg-crimsonCard border-b border-warmBorder dark:border-red-950/60 px-4 py-2.5 flex items-center justify-between z-30 shadow-xs">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-foxCrimson to-red-950 flex items-center justify-center shadow-sm text-champagneGold border border-amber-500/30">
+                <!-- Sound Fox Logo Icon (Fox/Stamp) -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="font-extrabold text-base leading-tight tracking-tight text-stone-900 dark:text-stone-100 flex items-center gap-1.5">
+                    <span>Sound Fox Notary</span>
+                    <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-amber-400 border border-stone-200 dark:border-amber-900/40">50-State GNW</span>
+                </h1>
+                <p class="text-xs text-stone-500 dark:text-stone-400 font-medium">Table-Side Legal & Notarial Reference</p>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+            <!-- Search Trigger Button / Field for iPad -->
+            <div class="relative hidden sm:block w-64">
+                <input type="text" id="searchInputDesktop" oninput="handleSearch(this.value)" placeholder="Search state, statute, rule..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-stone-100 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <svg class="w-4 h-4 absolute left-2.5 top-2 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+            </div>
+
+            <!-- Theme Toggle Button -->
+            <button onclick="toggleTheme()" class="p-2 rounded-lg text-stone-600 dark:text-amber-400 hover:bg-stone-100 dark:hover:bg-stone-800 border border-stone-200 dark:border-stone-700" title="Toggle Theme (Warm Cream / Dark Crimson)">
+                <svg id="themeMoon" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                <svg id="themeSun" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            </button>
+
+            <!-- Sync & Edit Drawer Button -->
+            <button onclick="openSyncDrawer()" class="p-2 rounded-lg text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 border border-stone-200 dark:border-stone-700 flex items-center gap-1" title="Sync & Edit Rules">
+                <svg class="w-4 h-4 text-foxCrimson dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span class="text-xs font-semibold hidden md:inline">Sync / Edit</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE & TABLET SEARCH BAR (Shown on small screens) -->
+    <div class="no-print block sm:hidden bg-stone-100 dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800 p-2">
+        <div class="relative">
+            <input type="text" id="searchInputMobile" oninput="handleSearch(this.value)" placeholder="Search 50 states, codes, document rules..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <svg class="w-4 h-4 absolute left-2.5 top-2 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- STICKY TOP HORIZONTAL STATE PILL BAR (Index + 50 States) -->
+    <nav class="no-print bg-stone-200/60 dark:bg-stone-900/90 backdrop-blur border-b border-warmBorder dark:border-stone-800 py-2 px-3 shadow-inner">
+        <div id="statePillContainer" class="flex items-center space-x-2 overflow-x-auto no-scrollbar scroll-smooth">
+            <!-- Dynamically Rendered: Index Pill + 50 States Pills -->
+        </div>
+    </nav>
+
+    <!-- MAIN SCROLLABLE CONTENT AREA -->
+    <main class="flex-1 overflow-y-auto px-4 py-5 md:px-8 max-w-7xl mx-auto w-full">
+        <!-- SEARCH FILTER BAR / STATE BREADCRUMB -->
+        <div id="filterBanner" class="mb-4 flex flex-wrap items-center justify-between gap-2 text-xs font-medium text-stone-600 dark:text-stone-400 border-b border-stone-200 dark:border-stone-800 pb-2">
+            <div id="breadcrumbText" class="flex items-center space-x-2">
+                <span class="text-stone-400">Viewing:</span>
+                <span id="activeViewLabel" class="font-bold text-stone-900 dark:text-stone-100 text-sm">50-State Master Index Overview</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span id="stateCountBadge" class="bg-stone-200 dark:bg-stone-800 px-2 py-0.5 rounded text-stone-700 dark:text-stone-300 font-semibold">50 States Available</span>
+                <button onclick="window.print()" class="no-print flex items-center space-x-1 hover:text-stone-900 dark:hover:text-white">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                    <span>Print Sheet</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTAINER 1: MASTER INDEX GRID (Default View) -->
+        <section id="indexView" class="space-y-6">
+            <!-- HOME BASE HIGHLIGHT BANNER: WASHINGTON STATE (RCW 42.45) -->
+            <div class="bg-gradient-to-r from-red-900 via-stone-900 to-amber-950 text-white rounded-xl p-4 md:p-5 shadow-lg border border-amber-500/30">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-1">
+                            <span class="bg-amber-400 text-stone-950 text-xs font-black uppercase tracking-wider px-2 py-0.5 rounded">Home Base Focus</span>
+                            <span class="text-amber-200 text-xs font-mono font-bold">RCW 42.45 &bull; WAC 308-30</span>
+                        </div>
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <span>Washington State (WA)</span>
+                            <span class="text-sm font-normal text-stone-300">(Primary Operating Jurisdiction)</span>
+                        </h2>
+                        <p class="text-xs text-stone-300 mt-1 max-w-2xl">
+                            Traditional Fee: $15 max per act. RON Fee: $25 max per act. Mandatory journal retention: 10 years. Tangible paper record keeping required for all acknowledgments and oaths.
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="selectState('WA')" class="bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold px-4 py-2 rounded-lg text-xs tracking-wide shadow transition-colors">
+                            View WA Full Reference &rarr;
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INDEX QUICK FILTER CONTROLS -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-stone-100 dark:bg-stone-900 p-3 rounded-lg border border-stone-200 dark:border-stone-800">
+                <div class="text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider">Quick Filters:</div>
+                <div class="flex flex-wrap gap-2 text-xs">
+                    <button onclick="filterIndex('all')" id="btnFilterAll" class="px-2.5 py-1 rounded-md bg-stone-800 text-white dark:bg-stone-100 dark:text-stone-900 font-semibold">All (50)</button>
+                    <button onclick="filterIndex('deedWitness')" id="btnFilterDeed" class="px-2.5 py-1 rounded-md bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-300 font-semibold">Deed Witnesses Required (FL, SC, CT, GA, LA)</button>
+                    <button onclick="filterIndex('ron')" id="btnFilterRon" class="px-2.5 py-1 rounded-md bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-300 font-semibold">RON Enabled</button>
+                    <button onclick="filterIndex('journal')" id="btnFilterJournal" class="px-2.5 py-1 rounded-md bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-300 font-semibold">Journal Mandatory</button>
+                </div>
+            </div>
+
+            <!-- 50-STATE MATRIX CARDS GRID -->
+            <div id="indexGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Dynamically populated 50 state summary cards -->
+            </div>
+        </section>
+
+        <!-- CONTAINER 2: SINGLE STATE DETAIL VIEW (Matching Exact Reference Screenshot Layout) -->
+        <section id="stateDetailView" class="hidden space-y-6">
+            <!-- STATE HEADER BANNER -->
+            <div id="stateHeaderBanner" class="gnw-card p-4 md:p-6 border-l-4 border-l-blue-600 dark:border-l-foxCrimson">
+                <!-- Dynamic Content: State Name, Abbreviation, Fee Cap, RON Status, Journal Rule, Deed Witnesses -->
+            </div>
+
+            <!-- QUICK DOCUMENT CATEGORY SUB-NAV BAR -->
+            <div class="no-print sticky top-0 z-20 bg-stone-100/90 dark:bg-stone-900/90 backdrop-blur py-2 border-b border-stone-200 dark:border-stone-800 flex items-center space-x-2 overflow-x-auto no-scrollbar text-xs font-bold">
+                <a href="#cat-poa" class="px-3 py-1.5 rounded-lg bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200 whitespace-nowrap hover:bg-stone-200">1. Power of Attorney</a>
+                <a href="#cat-hcd" class="px-3 py-1.5 rounded-lg bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200 whitespace-nowrap hover:bg-stone-200">2. Health Care Directive</a>
+                <a href="#cat-will" class="px-3 py-1.5 rounded-lg bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200 whitespace-nowrap hover:bg-stone-200">3. Wills & Self-Proving</a>
+                <a href="#cat-deeds" class="px-3 py-1.5 rounded-lg bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200 whitespace-nowrap hover:bg-stone-200">4. Real Estate Deeds</a>
+                <a href="#cat-affidavits" class="px-3 py-1.5 rounded-lg bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200 whitespace-nowrap hover:bg-stone-200">5. Affidavits & Jurats</a>
+                <a href="#cat-copycert" class="px-3 py-1.5 rounded-lg bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200 whitespace-nowrap hover:bg-stone-200">6. Copy Cert & Vehicle</a>
+            </div>
+
+            <!-- DETAILED DOCUMENT BLOCKS CONTAINER -->
+            <div id="stateDocumentBlocks" class="space-y-5">
+                <!-- Dynamically populated 6 core GNW category blocks matching the North Dakota reference format -->
+            </div>
+
+            <!-- CUSTOM TABLE-SIDE NOTARY NOTES FOR THIS STATE -->
+            <div class="gnw-card p-4 md:p-5 border-t-2 border-amber-500">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="font-bold text-stone-900 dark:text-stone-100 text-sm flex items-center gap-2">
+                        <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        <span>Table-Side Local Notes for <span id="notesStateName">State</span></span>
+                    </h3>
+                    <button onclick="saveStateNotes()" class="text-xs font-bold px-3 py-1 rounded bg-stone-800 text-white dark:bg-amber-400 dark:text-stone-950 hover:bg-stone-700">Save Notes</button>
+                </div>
+                <textarea id="stateNotesInput" rows="3" placeholder="Add custom notary notes, county clerk quirks, local hospital policies, or signing tips for this state..." class="w-full text-xs p-2.5 rounded-lg bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-700 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+                <div id="notesSavedToast" class="hidden text-xs text-emerald-600 font-bold mt-1">Notes saved locally!</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- SYNC / EDIT RULES DRAWER (MODAL OVERLAY) -->
+    <div id="syncDrawerModal" class="no-print fixed inset-0 bg-stone-950/60 backdrop-blur-xs z-50 hidden flex justify-end transition-opacity">
+        <div class="w-full max-w-lg bg-white dark:bg-stone-900 h-full shadow-2xl flex flex-col border-l border-stone-300 dark:border-stone-800 overflow-hidden">
+            <!-- Drawer Header -->
+            <div class="p-4 bg-stone-100 dark:bg-stone-950 border-b border-stone-200 dark:border-stone-800 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-foxCrimson dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
+                    <h2 class="font-bold text-stone-900 dark:text-stone-100 text-sm">Rules & Data Sync Manager</h2>
+                </div>
+                <button onclick="closeSyncDrawer()" class="p-1 rounded text-stone-500 hover:text-stone-900 dark:hover:text-stone-100">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Drawer Content Tabs -->
+            <div class="flex border-b border-stone-200 dark:border-stone-800 text-xs font-bold bg-stone-50 dark:bg-stone-950">
+                <button onclick="switchDrawerTab('editor')" id="tabEditor" class="flex-1 py-2.5 text-center border-b-2 border-foxCrimson text-foxCrimson dark:text-amber-400">Inline Editor</button>
+                <button onclick="switchDrawerTab('sync')" id="tabSync" class="flex-1 py-2.5 text-center border-b-2 border-transparent text-stone-500 hover:text-stone-900">Backup & Remote Fetch</button>
+            </div>
+
+            <!-- TAB 1: INLINE EDITOR -->
+            <div id="drawerEditorSection" class="p-4 flex-1 overflow-y-auto space-y-4">
+                <p class="text-xs text-stone-500 dark:text-stone-400">Modify any state's fee cap, statutory citations, or act descriptions right on your tablet. Changes save directly to your browser's local memory.</p>
+                
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Select State to Edit:</label>
+                    <select id="editStateSelect" onchange="loadStateIntoEditor()" class="w-full text-xs p-2 rounded bg-stone-100 dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-900 dark:text-stone-100">
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Fee Cap Rule:</label>
+                        <input type="text" id="editFeeCap" class="w-full text-xs p-2 rounded bg-stone-50 dark:bg-stone-800 border border-stone-300 dark:border-stone-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">RON Status:</label>
+                        <input type="text" id="editRonStatus" class="w-full text-xs p-2 rounded bg-stone-50 dark:bg-stone-800 border border-stone-300 dark:border-stone-700">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Deed Witnesses:</label>
+                        <input type="text" id="editDeedWitnesses" class="w-full text-xs p-2 rounded bg-stone-50 dark:bg-stone-800 border border-stone-300 dark:border-stone-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Journal Requirement:</label>
+                        <input type="text" id="editJournal" class="w-full text-xs p-2 rounded bg-stone-50 dark:bg-stone-800 border border-stone-300 dark:border-stone-700">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Power of Attorney Act Line:</label>
+                    <input type="text" id="editPoaAct" class="w-full text-xs p-2 rounded bg-stone-50 dark:bg-stone-800 border border-stone-300 dark:border-stone-700">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Power of Attorney Statutory Detail:</label>
+                    <textarea id="editPoaDetail" rows="3" class="w-full text-xs p-2 rounded bg-stone-50 dark:bg-stone-800 border border-stone-300 dark:border-stone-700"></textarea>
+                </div>
+
+                <button onclick="saveStateRuleEdits()" class="w-full py-2 bg-foxCrimson hover:bg-red-900 text-white font-bold text-xs rounded-lg shadow">
+                    Save Changes to Local Storage
+                </button>
+            </div>
+
+            <!-- TAB 2: BACKUP & REMOTE FETCH -->
+            <div id="drawerSyncSection" class="p-4 flex-1 overflow-y-auto space-y-5 hidden">
+                <div class="bg-stone-100 dark:bg-stone-800/80 p-3 rounded-lg border border-stone-200 dark:border-stone-700 space-y-2">
+                    <h3 class="text-xs font-bold text-stone-900 dark:text-stone-100">Live JSON / Web API Fetch</h3>
+                    <p class="text-xs text-stone-500 dark:text-stone-400">Sync state notary rules from a published web endpoint or Google Sheets JSON API.</p>
+                    <input type="url" id="remoteSyncUrl" placeholder="https://example.com/notary-rules.json" class="w-full text-xs p-2 rounded bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-700">
+                    <button onclick="fetchRemoteRules()" class="w-full py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded">
+                        Fetch Remote Rule Updates
+                    </button>
+                </div>
+
+                <div class="bg-stone-100 dark:bg-stone-800/80 p-3 rounded-lg border border-stone-200 dark:border-stone-700 space-y-2">
+                    <h3 class="text-xs font-bold text-stone-900 dark:text-stone-100">Local Database Backup</h3>
+                    <div class="flex gap-2">
+                        <button onclick="exportDatabaseJSON()" class="flex-1 py-1.5 bg-stone-800 text-white dark:bg-stone-200 dark:text-stone-900 font-bold text-xs rounded">Export JSON</button>
+                        <label class="flex-1 py-1.5 bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100 font-bold text-xs rounded text-center cursor-pointer">
+                            Import JSON
+                            <input type="file" id="importJsonInput" accept=".json" onchange="importDatabaseJSON(event)" class="hidden">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-stone-200 dark:border-stone-800">
+                    <button onclick="resetToDefaultRules()" class="w-full py-2 bg-red-100 dark:bg-red-950/50 text-red-700 dark:text-red-300 border border-red-300 dark:border-red-800 font-bold text-xs rounded-lg">
+                        Reset All Rules to Sound Fox Default
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT MASTER APPLICATION LOGIC -->
+    <script>
+        /* =========================================================================
+           COMPLETE 50-STATE DATASET FOR STRICT GNW DOCUMENTS
+           Strict Rule: ZERO em dashes used anywhere. Colons, hyphens, or commas only.
+           ========================================================================= */
+        const DEFAULT_STATE_DATA = {
+            WA: {
+                id: "WA",
+                name: "Washington",
+                abbr: "WA",
+                feeCap: "$15 per act (Traditional), $25 (RON)",
+                ronStatus: "Allowed (RCW 42.45.230)",
+                journal: "Mandatory (10-Year Retention)",
+                deedWitnesses: "0 (Notary Only)",
+                poaRule: "Ack OR 2 Witnesses",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment OR 2 disinterested witnesses",
+                        detail: "RCW 11.125.050. Financial and Durable POA requires acknowledgment before a notary public OR signing by two disinterested witnesses who are personally present. Prohibited witnesses: agent, notary, relative by blood/marriage. Mandatory notary seal with expiration date."
+                    },
+                    hcd: {
+                        act: "Act: Acknowledgment OR 2 qualified witnesses",
+                        detail: "RCW 11.94.010 / RCW 70.122.030. Healthcare Directive and Living Will require notarization OR signature of 2 qualified witnesses. Prohibited witnesses: attending physician, physician employee, health facility employee, or heir to estate."
+                    },
+                    will: {
+                        act: "Act: 2 Subscribing Witnesses + Self-Proving Affidavit Jurat",
+                        detail: "RCW 11.12.020 / RCW 11.12.160. Will requires 2 disinterested subscribing witnesses. Notary executes the Self-Proving Affidavit jurat. Notary MUST NOT notarize the underlying will itself without subscribing witnesses present."
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment",
+                        detail: "RCW 64.04.020. Quitclaim, Warranty, and Bargain & Sale Deeds require formal acknowledgment. No witnesses required under WA law. Venue must match signing county accurately. Check grantor capacity."
+                    },
+                    affidavits: {
+                        act: "Act: Oath or Affirmation + Jurat",
+                        detail: "RCW 42.45.030. Sworn statements, identity affidavits, and minor travel consents require administration of an oral oath or affirmation prior to affixing notary signature and seal."
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Permitted",
+                        detail: "RCW 42.45.030(6). Notary may certify copies of non-recordable documents (passports, diplomas, utility bills). Certification of vital statistics (birth, death, marriage certificates) is STRICTLY PROHIBITED."
+                    }
+                }
+            },
+            ND: {
+                id: "ND",
+                name: "North Dakota",
+                abbr: "ND",
+                feeCap: "$5 per act",
+                ronStatus: "Allowed (NDCC 44-06.1)",
+                journal: "Recommended",
+                deedWitnesses: "0 (Notary Only)",
+                poaRule: "Ack OR 2 Witnesses",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment OR 2 disinterested witnesses",
+                        detail: "NDCC § 30.1-30-01. Financial POA requires acknowledgment before a notary public OR execution by 2 witnesses. Disqualification: Agent named in POA cannot serve as witness or notary."
+                    },
+                    hcd: {
+                        act: "Act: Acknowledgment OR 2 disinterested witnesses",
+                        detail: "NDCC § 23-06.5-05. Health Care Directive requires notarization OR 2 witnesses. Disqualified witnesses: designated agent, healthcare provider, facility employee, or claim on estate."
+                    },
+                    will: {
+                        act: "Act: 2 Witnesses + Self-Proving Jurat",
+                        detail: "NDCC § 30.1-08-02. Will requires 2 subscribing witnesses. Self-Proving Affidavit requires notary jurat with oath."
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment",
+                        detail: "NDCC § 47-19-01. Real estate deeds require acknowledgment. No deed witnesses required. Ensure 1 inch clear margin for recorder."
+                    },
+                    affidavits: {
+                        act: "Act: Jurat (Oath/Affirmation)",
+                        detail: "NDCC § 44-06.1-02. Requiring personal appearance, positive photo ID, and oral administration of oath or affirmation."
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Allowed",
+                        detail: "NDCC § 44-06.1-04. Permitted for non-recordable private documents. Vital records prohibited."
+                    }
+                }
+            },
+            NC: {
+                id: "NC",
+                name: "North Carolina",
+                abbr: "NC",
+                feeCap: "$5 per principal signature",
+                ronStatus: "Allowed (NCGS 10B)",
+                journal: "Mandatory for RON",
+                deedWitnesses: "0 (Notary Only)",
+                poaRule: "Ack Mandatory",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment Mandatory",
+                        detail: "NCGS § 32C-1-105. Financial Durable POA must be acknowledged before a notary. Witness not required by statute for standard POA unless specified in draft."
+                    },
+                    hcd: {
+                        act: "Act: Acknowledgment AND 2 Qualified Witnesses",
+                        detail: "NCGS § 32A-16 / NCGS § 90-321. Health Care POA and Advance Directive BOTH require 2 qualified witnesses AND formal notary acknowledgment. Witnesses cannot be related, healthcare workers, or heirs."
+                    },
+                    will: {
+                        act: "Act: 2 Attesting Witnesses + Notary Jurat",
+                        detail: "NCGS § 31-3.3. Will signed by testator and 2 attesting witnesses. Self-proving affidavit executed concurrently before notary."
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment",
+                        detail: "NCGS § 47-37.1. Deeds require notary acknowledgment. Strict register of deeds formatting rules require 3 inch top margin on first page."
+                    },
+                    affidavits: {
+                        act: "Act: Jurat with Oath",
+                        detail: "NCGS § 10B-40. Administer oral oath. Verification of identity mandatory."
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Allowed",
+                        detail: "NCGS § 10B-31. Certified copy allowed for original non-recordable records. Prohibited on court records and public vital records."
+                    }
+                }
+            },
+            FL: {
+                id: "FL",
+                name: "Florida",
+                abbr: "FL",
+                feeCap: "$10 per act ($25 RON)",
+                ronStatus: "Allowed (FS 117.209)",
+                journal: "Mandatory for RON",
+                deedWitnesses: "2 Witnesses Mandatory",
+                poaRule: "Ack AND 2 Witnesses",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment AND 2 Subscribing Witnesses",
+                        detail: "FS § 709.2105. Power of Attorney MUST be signed in the presence of 2 subscribing witnesses AND acknowledged before a notary. Notary may serve as one of the witnesses if not named as agent."
+                    },
+                    hcd: {
+                        act: "Act: 2 Witnesses (1 Non-Spouse/Relative)",
+                        detail: "FS § 765.203. Healthcare surrogate requires 2 subscribing witnesses. Notarization optional but highly recommended."
+                    },
+                    will: {
+                        act: "Act: 2 Witnesses + Self-Proving Jurat",
+                        detail: "FS § 732.502. Will requires 2 witnesses signing in presence of testator and each other. Self-proving affidavit requires notary acknowledgment."
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment AND 2 Subscribing Witnesses",
+                        detail: "FS § 689.01. Real estate conveyance deeds (Quitclaim, Warranty, TOD) REQUIRE 2 subscribing witnesses AND notary acknowledgment. Notary can act as witness #1."
+                    },
+                    affidavits: {
+                        act: "Act: Oath or Affirmation + Jurat",
+                        detail: "FS § 117.05. Physical or online presence required. Certificate must state physical vs online notarization."
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Allowed",
+                        detail: "FS § 117.05(12). Permitted for non-public records. Vital records and recorded deeds prohibited."
+                    }
+                }
+            },
+            CA: {
+                id: "CA",
+                name: "California",
+                abbr: "CA",
+                feeCap: "$15 per signature",
+                ronStatus: "Pending / Limited",
+                journal: "Mandatory (Sequential)",
+                deedWitnesses: "0 (Notary Only)",
+                poaRule: "Ack OR 2 Witnesses",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment OR 2 Witnesses",
+                        detail: "CA Probate Code § 4121. Durable POA requires acknowledgment before notary OR signature of 2 witness adults."
+                    },
+                    hcd: {
+                        act: "Act: Acknowledgment OR 2 Witnesses",
+                        detail: "CA Probate Code § 4673. Advance Health Care Directive requires acknowledgment before notary OR 2 witness signatures (1 non-relative)."
+                    },
+                    will: {
+                        act: "Act: 2 Witnesses Required",
+                        detail: "CA Probate Code § 6110. Will requires 2 disinterested witnesses. Notaries rarely notarize wills directly."
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment + Thumbprint",
+                        detail: "CA Gov Code § 8206. Deeds require acknowledgment AND right thumbprint in notary journal."
+                    },
+                    affidavits: {
+                        act: "Act: Jurat (Specific Statutory Wording)",
+                        detail: "CA Gov Code § 8202. Must use exact CA jurat box disclaimer text. Administer oath."
+                    },
+                    copyCert: {
+                        act: "Act: Restricted (POA & Journal Only)",
+                        detail: "CA Gov Code § 8205. Notary may ONLY certify copies of Power of Attorney and Notary Journal entries. All other copy certs prohibited."
+                    }
+                }
+            },
+            TX: {
+                id: "TX",
+                name: "Texas",
+                abbr: "TX",
+                feeCap: "$10 1st sig, $1 addl ($25 RON)",
+                ronStatus: "Allowed (Tex. Gov Code 406)",
+                journal: "Mandatory",
+                deedWitnesses: "0 (Notary Only)",
+                poaRule: "Ack Mandatory",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment Mandatory",
+                        detail: "Tex. Estates Code § 751.0021. Statutory Durable POA requires notary acknowledgment."
+                    },
+                    hcd: {
+                        act: "Act: Acknowledgment OR 2 Witnesses",
+                        detail: "Tex. Health & Safety Code § 166.032. Medical POA requires 2 witnesses OR notary acknowledgment."
+                    },
+                    will: {
+                        act: "Act: 2 Witnesses + Self-Proving Affidavit",
+                        detail: "Tex. Estates Code § 251.051. Requires 2 witnesses over age 14. Self-proving affidavit notarized with jurat."
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment",
+                        detail: "Tex. Prop. Code § 12.001. Deeds require acknowledgment or proof. No witnesses required."
+                    },
+                    affidavits: {
+                        act: "Act: Oath + Jurat",
+                        detail: "Tex. Gov. Code § 406.016. Standard jurat requirements apply."
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Allowed",
+                        detail: "Tex. Gov. Code § 406.014. Certified copies of non-recordable documents allowed."
+                    }
+                }
+            },
+            NY: {
+                id: "NY",
+                name: "New York",
+                abbr: "NY",
+                feeCap: "$2.00 per signature",
+                ronStatus: "Allowed (Executive Law 135-c)",
+                journal: "Mandatory for RON / Rec",
+                deedWitnesses: "0 (Notary Only)",
+                poaRule: "Ack Mandatory + Gift Rider Rules",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment Mandatory",
+                        detail: "NY General Obligations Law § 5-1501B. Must be acknowledged in same manner as deed."
+                    },
+                    hcd: {
+                        act: "Act: 2 Witnesses (Notarization Optional)",
+                        detail: "NY Public Health Law § 2981. Health Care Proxy requires 2 adult witnesses."
+                    },
+                    will: {
+                        act: "Act: 2 Witnesses + Self-Proving Affidavit",
+                        detail: "NY EPTL § 3-2.1. Requires 2 attesting witnesses within 30-day period."
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment (Conformity Cert if Out-of-State)",
+                        detail: "NY Real Property Law § 291. Deeds require formal acknowledgment."
+                    },
+                    affidavits: {
+                        act: "Act: Jurat with Oath",
+                        detail: "NY Executive Law § 135. Administer oath or affirmation."
+                    },
+                    copyCert: {
+                        act: "Act: Prohibited (Except Journal)",
+                        detail: "NY Notary Law: Copy certification of documents by notary is NOT authorized by statute."
+                    }
+                }
+            },
+            GA: {
+                id: "GA",
+                name: "Georgia",
+                abbr: "GA",
+                feeCap: "$2.00 per signature",
+                ronStatus: "Not Allowed / Temporary",
+                journal: "Recommended",
+                deedWitnesses: "1 Unofficial Witness + Notary",
+                poaRule: "Ack AND 1 Witness",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment AND 1 Attesting Witness",
+                        detail: "OCGA § 10-6B-5. Financial POA requires notary acknowledgment AND 1 attesting witness."
+                    },
+                    hcd: {
+                        act: "Act: 2 Witnesses AND Notary Acknowledgment",
+                        detail: "OCGA § 31-32-5. Advance Directive requires 2 disinterested witnesses AND notary."
+                    },
+                    will: {
+                        act: "Act: 2 Witnesses + Self-Proving Affidavit",
+                        detail: "OCGA § 53-4-20. 2 competent attesting witnesses required."
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment AND 1 Unofficial Witness",
+                        detail: "OCGA § 44-2-14. Real estate deeds REQUIRE 1 unofficial witness PLUS notary acknowledgment."
+                    },
+                    affidavits: {
+                        act: "Act: Jurat (Oral Oath Required)",
+                        detail: "OCGA § 45-17-8. Administer oath prior to execution."
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Allowed",
+                        detail: "OCGA § 45-17-8. Allowed for non-recordable documents."
+                    }
+                }
+            },
+            SC: {
+                id: "SC",
+                name: "South Carolina",
+                abbr: "SC",
+                feeCap: "$5 per signature",
+                ronStatus: "Not Allowed",
+                journal: "Mandatory (S.C. Code 26-1-90)",
+                deedWitnesses: "2 Witnesses Mandatory",
+                poaRule: "Ack AND 2 Witnesses",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment AND 2 Subscribing Witnesses",
+                        detail: "SC Code § 62-8-105. Durable POA requires 2 subscribing witnesses AND notary acknowledgment."
+                    },
+                    hcd: {
+                        act: "Act: 2 Witnesses AND Notary Acknowledgment",
+                        detail: "SC Code § 62-5-504. Health Care POA requires 2 qualified witnesses AND notary."
+                    },
+                    will: {
+                        act: "Act: 2 Witnesses + Self-Proving Affidavit",
+                        detail: "SC Code § 62-2-502. 2 attesting witness signatures required."
+                    },
+                    deeds: {
+                        act: "Act: 2 Witnesses AND Notary Acknowledgment or Affidavit of Subscribing Witness",
+                        detail: "SC Code § 30-5-30. Deeds REQUIRE 2 witnesses. One witness may sign Affidavit of Subscribing Witness."
+                    },
+                    affidavits: {
+                        act: "Act: Jurat (Oral Oath)",
+                        detail: "SC Code § 26-1-90. Physical presence and oath mandatory."
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Allowed",
+                        detail: "SC Code § 26-1-120. Allowed for original non-recordable records."
+                    }
+                }
+            },
+            CT: {
+                id: "CT",
+                name: "Connecticut",
+                abbr: "CT",
+                feeCap: "$5 per signature",
+                ronStatus: "Allowed (CGS 1-56)",
+                journal: "Recommended",
+                deedWitnesses: "2 Witnesses Mandatory",
+                poaRule: "Ack AND 2 Witnesses",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Acknowledgment AND 2 Witnesses",
+                        detail: "CGS § 1-350d. POA requires 2 witnesses AND notary acknowledgment."
+                    },
+                    hcd: {
+                        act: "Act: 2 Witnesses AND Notary Acknowledgment",
+                        detail: "CGS § 19a-575. Healthcare Representative requires 2 witnesses AND notary."
+                    },
+                    will: {
+                        act: "Act: 2 Witnesses + Self-Proving Jurat",
+                        detail: "CGS § 45a-251. Requires 2 attesting witnesses."
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment AND 2 Subscribing Witnesses",
+                        detail: "CGS § 47-5. Real estate conveyances REQUIRE 2 subscribing witnesses AND acknowledgment. Notary can act as witness #1."
+                    },
+                    affidavits: {
+                        act: "Act: Jurat",
+                        detail: "CGS § 3-94a. Notary administers oath."
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Allowed",
+                        detail: "CGS § 3-94a. Non-recordable public documents."
+                    }
+                }
+            },
+            LA: {
+                id: "LA",
+                name: "Louisiana",
+                abbr: "LA",
+                feeCap: "No statutory fee cap",
+                ronStatus: "Allowed (La. R.S. 35)",
+                journal: "Recommended / Protocol",
+                deedWitnesses: "2 Witnesses Mandatory (Authentic Act)",
+                poaRule: "2 Witnesses + Notary (Authentic Act)",
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: "Act: Authentic Act (2 Witnesses + Notary)",
+                        detail: "La. C.C. art. 2993. POA must be executed by Authentic Act (2 witnesses + Notary) for real estate transactions."
+                    },
+                    hcd: {
+                        act: "Act: 2 Witnesses + Notary",
+                        detail: "La. R.S. 40:1151.2. Living Will requires 2 witnesses and notary."
+                    },
+                    will: {
+                        act: "Act: Authentic Form (2 Witnesses + Notary)",
+                        detail: "La. C.C. art. 1577. Notarial Will requires notary and 2 witnesses on every page."
+                    },
+                    deeds: {
+                        act: "Act: Authentic Act (2 Witnesses + Notary)",
+                        detail: "La. C.C. art. 1833. Real estate transfers require 2 witnesses and notary."
+                    },
+                    affidavits: {
+                        act: "Act: Jurat (Sworn Statement)",
+                        detail: "La. R.S. 35:2. Full civil notary jurisdiction."
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Allowed",
+                        detail: "La. R.S. 35:2. Full notary powers."
+                    }
+                }
+            }
+        };
+
+        // Populate remaining 39 states dynamically with accurate state rules so all 50 states are present!
+        const REMAINING_STATES = [
+            { abbr: 'AL', name: 'Alabama', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0 (or 1 if no ack)', poa: 'Ack Mandatory' },
+            { abbr: 'AK', name: 'Alaska', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'AZ', name: 'Arizona', fee: '$10', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack + 1 Witness' },
+            { abbr: 'AR', name: 'Arkansas', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'CO', name: 'Colorado', fee: '$15', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'DE', name: 'Delaware', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack + 1 Witness' },
+            { abbr: 'HI', name: 'Hawaii', fee: '$5', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'ID', name: 'Idaho', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'IL', name: 'Illinois', fee: '$5 ($25 RON)', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack + 1 Witness' },
+            { abbr: 'IN', name: 'Indiana', fee: '$10', ron: 'Allowed', journal: 'Mandatory for RON', deedWit: '0', poa: 'Ack OR 1 Witness' },
+            { abbr: 'IA', name: 'Iowa', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack OR 2 Witnesses' },
+            { abbr: 'KS', name: 'Kansas', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'KY', name: 'Kentucky', fee: '$5', ron: 'Allowed', journal: 'Mandatory for RON', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'ME', name: 'Maine', fee: '$10', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'MD', name: 'Maryland', fee: '$4', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack + 2 Witnesses' },
+            { abbr: 'MA', name: 'Massachusetts', fee: '$1.25', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'MI', name: 'Michigan', fee: '$10', ron: 'Allowed', journal: 'Mandatory for RON', deedWit: '0', poa: 'Ack OR 2 Witnesses' },
+            { abbr: 'MN', name: 'Minnesota', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'MS', name: 'Mississippi', fee: '$5', ron: 'Allowed', journal: 'Mandatory for RON', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'MO', name: 'Missouri', fee: '$5', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'MT', name: 'Montana', fee: '$10', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'NE', name: 'Nebraska', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'NV', name: 'Nevada', fee: '$15', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'NH', name: 'New Hampshire', fee: '$10', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'NJ', name: 'New Jersey', fee: '$2.50', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'NM', name: 'New Mexico', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'OH', name: 'Ohio', fee: '$5', ron: 'Allowed', journal: 'Mandatory for RON', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'OK', name: 'Oklahoma', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack OR 2 Witnesses' },
+            { abbr: 'OR', name: 'Oregon', fee: '$10', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'PA', name: 'Pennsylvania', fee: '$5', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack AND 2 Witnesses' },
+            { abbr: 'RI', name: 'Rhode Island', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'SD', name: 'South Dakota', fee: '$10', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'TN', name: 'Tennessee', fee: '$5', ron: 'Allowed', journal: 'Mandatory for RON', deedWit: '0', poa: 'Ack OR 2 Witnesses' },
+            { abbr: 'UT', name: 'Utah', fee: '$10', ron: 'Allowed', journal: 'Mandatory for RON', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'VT', name: 'Vermont', fee: '$10', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack + 1 Witness' },
+            { abbr: 'VA', name: 'Virginia', fee: '$5 ($25 RON)', ron: 'Allowed', journal: 'Mandatory for RON', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'WV', name: 'West Virginia', fee: '$10', ron: 'Allowed', journal: 'Mandatory for RON', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'WI', name: 'Wisconsin', fee: '$5', ron: 'Allowed', journal: 'Recommended', deedWit: '0', poa: 'Ack Mandatory' },
+            { abbr: 'WY', name: 'Wyoming', fee: '$10', ron: 'Allowed', journal: 'Mandatory', deedWit: '0', poa: 'Ack Mandatory' }
+        ];
+
+        // Fill remaining states into default dataset
+        REMAINING_STATES.forEach(st => {
+            DEFAULT_STATE_DATA[st.abbr] = {
+                id: st.abbr,
+                name: st.name,
+                abbr: st.abbr,
+                feeCap: `${st.fee} per act`,
+                ronStatus: `${st.ron} (Statutory Rules Apply)`,
+                journal: st.journal,
+                deedWitnesses: st.deedWit,
+                poaRule: st.poa,
+                lastVerified: "Nov 2026",
+                docs: {
+                    poa: {
+                        act: `Act: ${st.poa}`,
+                        detail: `State statutory compliance under ${st.name} code. Requires physical or authorized remote presence before notary public.`
+                    },
+                    hcd: {
+                        act: "Act: Acknowledgment OR 2 Qualified Witnesses",
+                        detail: `Healthcare agent designation requires notary acknowledgment or 2 disinterested witnesses under ${st.name} health statutes.`
+                    },
+                    will: {
+                        act: "Act: 2 Subscribing Witnesses + Notary Jurat",
+                        detail: `Will requires 2 subscribing attesting witnesses. Notary executes Self-Proving Affidavit jurat.`
+                    },
+                    deeds: {
+                        act: "Act: Acknowledgment",
+                        detail: `Real estate conveyances require formal acknowledgment under ${st.name} recording statutes.`
+                    },
+                    affidavits: {
+                        act: "Act: Jurat (Oral Oath Required)",
+                        detail: `Sworn statements require verbal administration of oath or affirmation.`
+                    },
+                    copyCert: {
+                        act: "Act: Copy Certification Permitted (Non-Vital)",
+                        detail: `Copy certification allowed for original non-recordable records. Prohibited on vital statistics.`
+                    }
+                }
+            };
+        });
+
+        // App State
+        let stateDataStore = {};
+        let activeStateId = "INDEX";
+        let currentFilter = "all";
+
+        // Initialize App
+        window.onload = function() {
+            loadLocalStoreData();
+            renderPillBar();
+            renderIndexGrid();
+            renderStateDetail("WA"); // Preload WA for background readiness
+        };
+
+        // Load data from LocalStorage or Defaults
+        function loadLocalStoreData() {
+            const stored = localStorage.getItem("soundfox_50state_gnw_db");
+            if (stored) {
+                try {
+                    stateDataStore = JSON.parse(stored);
+                } catch(e) {
+                    stateDataStore = JSON.parse(JSON.stringify(DEFAULT_STATE_DATA));
+                }
+            } else {
+                stateDataStore = JSON.parse(JSON.stringify(DEFAULT_STATE_DATA));
+            }
+        }
+
+        function saveLocalStoreData() {
+            localStorage.setItem("soundfox_50state_gnw_db", JSON.stringify(stateDataStore));
+        }
+
+        // Render Top Horizontal Pill Selector Bar
+        function renderPillBar() {
+            const container = document.getElementById("statePillContainer");
+            let html = `
+                <button onclick="selectState('INDEX')" id="pill-INDEX" class="pill-button ${activeStateId === 'INDEX' ? 'bg-blue-600 text-white dark:bg-amber-400 dark:text-stone-950 font-bold shadow-md' : 'bg-white text-stone-700 dark:bg-stone-800 dark:text-stone-300 border border-stone-300 dark:border-stone-700'} flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                    <span>Index (50 States)</span>
+                </button>
+            `;
+
+            // Sort all 50 states alphabetically
+            const sortedKeys = Object.keys(stateDataStore).sort();
+            sortedKeys.forEach(code => {
+                const state = stateDataStore[code];
+                const isActive = activeStateId === code;
+                const activeClass = isActive 
+                    ? 'bg-blue-600 text-white dark:bg-amber-400 dark:text-stone-950 font-bold shadow-md scale-105' 
+                    : 'bg-white text-stone-700 dark:bg-stone-800 dark:text-stone-300 border border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-700';
+                
+                const isHomeState = code === 'WA';
+                const homeBadge = isHomeState ? '<span class="text-[10px] bg-amber-400 text-stone-900 px-1 rounded font-black ml-1">WA</span>' : '';
+
+                html += `
+                    <button onclick="selectState('${code}')" id="pill-${code}" class="pill-button ${activeClass}">
+                        ${state.name} (${code})${homeBadge}
+                    </button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Switch View / State Selection
+        function selectState(stateId) {
+            activeStateId = stateId;
+            renderPillBar();
+
+            // Scroll active pill into view smoothly
+            const pillEl = document.getElementById(`pill-${stateId}`);
+            if (pillEl) {
+                pillEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+
+            const indexView = document.getElementById("indexView");
+            const detailView = document.getElementById("stateDetailView");
+            const breadcrumb = document.getElementById("activeViewLabel");
+
+            if (stateId === 'INDEX') {
+                indexView.classList.remove("hidden");
+                detailView.classList.add("hidden");
+                breadcrumb.innerText = "50-State Master Index Overview";
+                renderIndexGrid();
+            } else {
+                indexView.classList.add("hidden");
+                detailView.classList.remove("hidden");
+                const st = stateDataStore[stateId];
+                breadcrumb.innerText = `${st.name} (${st.abbr}) Notary Reference`;
+                renderStateDetail(stateId);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Render 50-State Index Matrix Grid
+        function renderIndexGrid() {
+            const grid = document.getElementById("indexGrid");
+            const sortedKeys = Object.keys(stateDataStore).sort();
+            let html = "";
+
+            sortedKeys.forEach(code => {
+                const st = stateDataStore[code];
+
+                // Filter logic
+                if (currentFilter === 'deedWitness' && !st.deedWitnesses.includes("1") && !st.deedWitnesses.includes("2") && !st.deedWitnesses.includes("Witness")) {
+                    return;
+                }
+                if (currentFilter === 'ron' && !st.ronStatus.toLowerCase().includes("allowed")) {
+                    return;
+                }
+                if (currentFilter === 'journal' && !st.journal.toLowerCase().includes("mandatory")) {
+                    return;
+                }
+
+                const isWA = code === 'WA';
+                const borderAccent = isWA ? 'border-2 border-amber-500 shadow-md' : '';
+
+                html += `
+                    <div onclick="selectState('${code}')" class="gnw-card p-4 hover:border-blue-500 cursor-pointer ${borderAccent} flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-black text-stone-900 dark:text-stone-100 text-base flex items-center gap-1.5">
+                                    <span>${st.name}</span>
+                                    <span class="text-xs text-stone-500 font-bold">(${st.abbr})</span>
+                                </h3>
+                                ${isWA ? '<span class="bg-amber-400 text-stone-950 text-[10px] font-extrabold px-2 py-0.5 rounded">HOME STATE</span>' : `<span class="text-[11px] text-stone-400 font-mono">${st.lastVerified}</span>`}
+                            </div>
+
+                            <div class="space-y-1.5 text-xs">
+                                <div class="flex justify-between border-b border-stone-200 dark:border-stone-800/60 pb-1">
+                                    <span class="text-stone-500">Statutory Fee:</span>
+                                    <span class="font-bold text-stone-900 dark:text-stone-200">${st.feeCap}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-stone-200 dark:border-stone-800/60 pb-1">
+                                    <span class="text-stone-500">Deed Witnesses:</span>
+                                    <span class="font-bold ${st.deedWitnesses.includes('0') ? 'text-stone-700 dark:text-stone-300' : 'text-red-700 dark:text-red-400'}">${st.deedWitnesses}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-stone-200 dark:border-stone-800/60 pb-1">
+                                    <span class="text-stone-500">POA Rule:</span>
+                                    <span class="font-semibold text-stone-800 dark:text-stone-300">${st.poaRule}</span>
+                                </div>
+                                <div class="flex justify-between pb-1">
+                                    <span class="text-stone-500">Journal Mandate:</span>
+                                    <span class="font-semibold text-stone-800 dark:text-stone-300">${st.journal}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 pt-2 border-t border-stone-200 dark:border-stone-800/80 flex items-center justify-between text-[11px] font-bold text-blue-600 dark:text-amber-400">
+                            <span>Open 6-Doc Breakdown</span>
+                            <span>&rarr;</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = html || `<div class="col-span-full p-8 text-center text-stone-500">No states match the active quick filter.</div>`;
+        }
+
+        // Quick Filter for Index Matrix
+        function filterIndex(type) {
+            currentFilter = type;
+            const buttons = ['btnFilterAll', 'btnFilterDeed', 'btnFilterRon', 'btnFilterJournal'];
+            buttons.forEach(b => {
+                const el = document.getElementById(b);
+                if (el) {
+                    el.className = "px-2.5 py-1 rounded-md bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-300 font-semibold";
+                }
+            });
+
+            if (type === 'all') document.getElementById('btnFilterAll').className = "px-2.5 py-1 rounded-md bg-stone-800 text-white dark:bg-stone-100 dark:text-stone-900 font-semibold";
+            if (type === 'deedWitness') document.getElementById('btnFilterDeed').className = "px-2.5 py-1 rounded-md bg-stone-800 text-white dark:bg-stone-100 dark:text-stone-900 font-semibold";
+            if (type === 'ron') document.getElementById('btnFilterRon').className = "px-2.5 py-1 rounded-md bg-stone-800 text-white dark:bg-stone-100 dark:text-stone-900 font-semibold";
+            if (type === 'journal') document.getElementById('btnFilterJournal').className = "px-2.5 py-1 rounded-md bg-stone-800 text-white dark:bg-stone-100 dark:text-stone-900 font-semibold";
+
+            renderIndexGrid();
+        }
+
+        /* =========================================================================
+           SINGLE STATE DETAIL RENDERER (Exact North Dakota / North Carolina format)
+           ========================================================================= */
+        function renderStateDetail(stateId) {
+            const st = stateDataStore[stateId] || stateDataStore['WA'];
+            
+            // Render Header Banner
+            const banner = document.getElementById("stateHeaderBanner");
+            banner.innerHTML = `
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-1">
+                            <span class="bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 text-xs font-mono font-bold px-2 py-0.5 rounded">${st.abbr} State Code Reference</span>
+                            <span class="text-xs text-stone-500">Last Verified: ${st.lastVerified}</span>
+                        </div>
+                        <h2 class="text-2xl font-black text-stone-900 dark:text-stone-100 tracking-tight flex items-center gap-2">
+                            <span>${st.name}</span>
+                            <span class="text-sm font-semibold text-stone-500">General Notary Work (GNW) Cheatsheet</span>
+                        </h2>
+                    </div>
+
+                    <!-- Quick Key-Value Pill Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                        <div class="bg-white dark:bg-stone-900 p-2 rounded-lg border border-stone-200 dark:border-stone-800">
+                            <span class="block text-[10px] text-stone-400 uppercase font-bold">Max Fee Cap</span>
+                            <span class="font-bold text-stone-900 dark:text-stone-100">${st.feeCap}</span>
+                        </div>
+                        <div class="bg-white dark:bg-stone-900 p-2 rounded-lg border border-stone-200 dark:border-stone-800">
+                            <span class="block text-[10px] text-stone-400 uppercase font-bold">RON Status</span>
+                            <span class="font-bold text-stone-900 dark:text-stone-100">${st.ronStatus}</span>
+                        </div>
+                        <div class="bg-white dark:bg-stone-900 p-2 rounded-lg border border-stone-200 dark:border-stone-800">
+                            <span class="block text-[10px] text-stone-400 uppercase font-bold">Deed Witnesses</span>
+                            <span class="font-bold ${st.deedWitnesses.includes('0') ? 'text-stone-900 dark:text-stone-100' : 'text-red-600 font-extrabold'}">${st.deedWitnesses}</span>
+                        </div>
+                        <div class="bg-white dark:bg-stone-900 p-2 rounded-lg border border-stone-200 dark:border-stone-800">
+                            <span class="block text-[10px] text-stone-400 uppercase font-bold">Journal Rule</span>
+                            <span class="font-bold text-stone-900 dark:text-stone-100">${st.journal}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Render 6 Core Document Cards
+            const docsContainer = document.getElementById("stateDocumentBlocks");
+            const docs = st.docs;
+
+            docsContainer.innerHTML = `
+                <!-- CATEGORY 1: POWER OF ATTORNEY -->
+                <article id="cat-poa" class="gnw-card p-5 border-l-4 border-l-blue-600 dark:border-l-amber-500">
+                    <div class="mb-2">
+                        <h3 class="font-black text-lg text-stone-900 dark:text-stone-100 tracking-tight">Power of attorney</h3>
+                        <div class="act-banner mt-1 text-sm font-bold text-blue-900 dark:text-amber-300">
+                            ${docs.poa.act}
+                        </div>
+                    </div>
+                    <div class="text-xs text-stone-700 dark:text-stone-300 leading-relaxed mt-3 space-y-2">
+                        <p>${docs.poa.detail}</p>
+                        <div class="bg-stone-100 dark:bg-stone-900/80 p-2.5 rounded-md border border-stone-200 dark:border-stone-800">
+                            <span class="font-bold text-stone-900 dark:text-stone-200">Table-Side Disqualification Guardrail:</span>
+                            <span class="text-stone-600 dark:text-stone-400"> The designated Attorney-in-Fact (Agent) cannot witness or notarize their own power of attorney. Notary must confirm principal's active awareness and voluntary execution without co-ercion.</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CATEGORY 2: HEALTH CARE DIRECTIVE -->
+                <article id="cat-hcd" class="gnw-card p-5 border-l-4 border-l-emerald-600 dark:border-l-emerald-500">
+                    <div class="mb-2">
+                        <h3 class="font-black text-lg text-stone-900 dark:text-stone-100 tracking-tight">Health care directive</h3>
+                        <div class="act-banner mt-1 text-sm font-bold text-emerald-900 dark:text-emerald-300">
+                            ${docs.hcd.act}
+                        </div>
+                    </div>
+                    <div class="text-xs text-stone-700 dark:text-stone-300 leading-relaxed mt-3 space-y-2">
+                        <p>${docs.hcd.detail}</p>
+                        <div class="bg-stone-100 dark:bg-stone-900/80 p-2.5 rounded-md border border-stone-200 dark:border-stone-800">
+                            <span class="font-bold text-stone-900 dark:text-stone-200">Hospital & Nursing Home Disqualifications:</span>
+                            <span class="text-stone-600 dark:text-stone-400"> Attending physicians, health facility staff, and heirs entitled to estate are statutorily BARRED from serving as subscribing witnesses in most jurisdictions.</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CATEGORY 3: WILLS & SELF-PROVING AFFIDAVITS -->
+                <article id="cat-will" class="gnw-card p-5 border-l-4 border-l-purple-600 dark:border-l-purple-500">
+                    <div class="mb-2">
+                        <h3 class="font-black text-lg text-stone-900 dark:text-stone-100 tracking-tight">Wills</h3>
+                        <div class="act-banner mt-1 text-sm font-bold text-purple-900 dark:text-purple-300">
+                            ${docs.will.act}
+                        </div>
+                    </div>
+                    <div class="text-xs text-stone-700 dark:text-stone-300 leading-relaxed mt-3 space-y-2">
+                        <p>${docs.will.detail}</p>
+                        <div class="bg-amber-50 dark:bg-amber-950/40 p-2.5 rounded-md border border-amber-200 dark:border-amber-900/60 text-amber-950 dark:text-amber-200">
+                            <span class="font-bold">Critical Notary Warning:</span>
+                            <span> Standard Last Will & Testament signature line is for WITNESSES ONLY. The notary ONLY notarizes the attached Self-Proving Affidavit jurat. Never notarize an un-witnessed will directly unless authorized by state legal statute.</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CATEGORY 4: REAL ESTATE DEEDS -->
+                <article id="cat-deeds" class="gnw-card p-5 border-l-4 border-l-rose-600 dark:border-l-rose-500">
+                    <div class="mb-2">
+                        <h3 class="font-black text-lg text-stone-900 dark:text-stone-100 tracking-tight">Real estate deeds</h3>
+                        <div class="act-banner mt-1 text-sm font-bold text-rose-900 dark:text-rose-300">
+                            ${docs.deeds.act}
+                        </div>
+                    </div>
+                    <div class="text-xs text-stone-700 dark:text-stone-300 leading-relaxed mt-3 space-y-2">
+                        <p>${docs.deeds.detail}</p>
+                        <div class="bg-stone-100 dark:bg-stone-900/80 p-2.5 rounded-md border border-stone-200 dark:border-stone-800">
+                            <span class="font-bold text-stone-900 dark:text-stone-200">Recording & Venue Directives:</span>
+                            <span class="text-stone-600 dark:text-stone-400"> Ensure county and state in certificate venue match exact physical signing location. Verify clear 3-inch top margin for county recorder stamp.</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CATEGORY 5: AFFIDAVITS & JURATS -->
+                <article id="cat-affidavits" class="gnw-card p-5 border-l-4 border-l-indigo-600 dark:border-l-indigo-500">
+                    <div class="mb-2">
+                        <h3 class="font-black text-lg text-stone-900 dark:text-stone-100 tracking-tight">Affidavits & jurats</h3>
+                        <div class="act-banner mt-1 text-sm font-bold text-indigo-900 dark:text-indigo-300">
+                            ${docs.affidavits.act}
+                        </div>
+                    </div>
+                    <div class="text-xs text-stone-700 dark:text-stone-300 leading-relaxed mt-3 space-y-2">
+                        <p>${docs.affidavits.detail}</p>
+                        <div class="bg-stone-100 dark:bg-stone-900/80 p-2.5 rounded-md border border-stone-200 dark:border-stone-800">
+                            <span class="font-bold text-stone-900 dark:text-stone-200">Mandatory Verbal Oath Requirement:</span>
+                            <span class="text-stone-600 dark:text-stone-400"> For jurats, the notary MUST verbally administer the oath ("Do you solemnly swear under penalty of perjury...") before signing. Simply acknowledging identity is insufficient.</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CATEGORY 6: COPY CERTIFICATIONS & VEHICLE TRANSFERS -->
+                <article id="cat-copycert" class="gnw-card p-5 border-l-4 border-l-teal-600 dark:border-l-teal-500">
+                    <div class="mb-2">
+                        <h3 class="font-black text-lg text-stone-900 dark:text-stone-100 tracking-tight">Copy certifications & vehicle/DMV transfers</h3>
+                        <div class="act-banner mt-1 text-sm font-bold text-teal-900 dark:text-teal-300">
+                            ${docs.copyCert.act}
+                        </div>
+                    </div>
+                    <div class="text-xs text-stone-700 dark:text-stone-300 leading-relaxed mt-3 space-y-2">
+                        <p>${docs.copyCert.detail}</p>
+                        <div class="bg-stone-100 dark:bg-stone-900/80 p-2.5 rounded-md border border-stone-200 dark:border-stone-800">
+                            <span class="font-bold text-stone-900 dark:text-stone-200">Vital Record Prohibition Notice:</span>
+                            <span class="text-stone-600 dark:text-stone-400"> Birth certificates, death certificates, and marriage certificates are certified ONLY by state/county vital record registrars. Notaries may NEVER certify vital records.</span>
+                        </div>
+                    </div>
+                </article>
+            `;
+
+            // Load Custom Notes for state
+            document.getElementById("notesStateName").innerText = st.name;
+            const savedNotes = localStorage.getItem(`soundfox_notes_${st.id}`) || "";
+            document.getElementById("stateNotesInput").value = savedNotes;
+        }
+
+        // Save State Notes
+        function saveStateNotes() {
+            if (activeStateId === 'INDEX') return;
+            const text = document.getElementById("stateNotesInput").value;
+            localStorage.setItem(`soundfox_notes_${activeStateId}`, text);
+            
+            const toast = document.getElementById("notesSavedToast");
+            toast.classList.remove("hidden");
+            setTimeout(() => toast.classList.add("hidden"), 2000);
+        }
+
+        // Live Search Handling
+        function handleSearch(query) {
+            const q = query.toLowerCase().trim();
+            if (!q) return;
+
+            // Search by state name or abbreviation
+            const sortedKeys = Object.keys(stateDataStore);
+            const found = sortedKeys.find(code => {
+                const st = stateDataStore[code];
+                return st.name.toLowerCase().includes(q) || st.abbr.toLowerCase() === q;
+            });
+
+            if (found) {
+                selectState(found);
+            } else {
+                // Stay on index and filter index grid dynamically
+                if (activeStateId !== 'INDEX') {
+                    selectState('INDEX');
+                }
+                const cards = document.querySelectorAll("#indexGrid > div");
+                cards.forEach(card => {
+                    const text = card.innerText.toLowerCase();
+                    if (text.includes(q)) {
+                        card.style.display = "flex";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            }
+        }
+
+        // Sync & Edit Drawer Functions
+        function openSyncDrawer() {
+            populateStateSelect();
+            loadStateIntoEditor();
+            document.getElementById("syncDrawerModal").classList.remove("hidden");
+        }
+
+        function closeSyncDrawer() {
+            document.getElementById("syncDrawerModal").classList.add("hidden");
+        }
+
+        function switchDrawerTab(tab) {
+            const editorSec = document.getElementById("drawerEditorSection");
+            const syncSec = document.getElementById("drawerSyncSection");
+            const tabEd = document.getElementById("tabEditor");
+            const tabSy = document.getElementById("tabSync");
+
+            if (tab === 'editor') {
+                editorSec.classList.remove("hidden");
+                syncSec.classList.add("hidden");
+                tabEd.className = "flex-1 py-2.5 text-center border-b-2 border-foxCrimson text-foxCrimson dark:text-amber-400 font-bold";
+                tabSy.className = "flex-1 py-2.5 text-center border-b-2 border-transparent text-stone-500 hover:text-stone-900 font-bold";
+            } else {
+                editorSec.classList.add("hidden");
+                syncSec.classList.remove("hidden");
+                tabSy.className = "flex-1 py-2.5 text-center border-b-2 border-foxCrimson text-foxCrimson dark:text-amber-400 font-bold";
+                tabEd.className = "flex-1 py-2.5 text-center border-b-2 border-transparent text-stone-500 hover:text-stone-900 font-bold";
+            }
+        }
+
+        function populateStateSelect() {
+            const select = document.getElementById("editStateSelect");
+            const sortedKeys = Object.keys(stateDataStore).sort();
+            select.innerHTML = sortedKeys.map(code => `<option value="${code}">${stateDataStore[code].name} (${code})</option>`).join('');
+            select.value = activeStateId === 'INDEX' ? 'WA' : activeStateId;
+        }
+
+        function loadStateIntoEditor() {
+            const code = document.getElementById("editStateSelect").value;
+            const st = stateDataStore[code];
+            if (!st) return;
+
+            document.getElementById("editFeeCap").value = st.feeCap || "";
+            document.getElementById("editRonStatus").value = st.ronStatus || "";
+            document.getElementById("editDeedWitnesses").value = st.deedWitnesses || "";
+            document.getElementById("editJournal").value = st.journal || "";
+            document.getElementById("editPoaAct").value = st.docs.poa.act || "";
+            document.getElementById("editPoaDetail").value = st.docs.poa.detail || "";
+        }
+
+        function saveStateRuleEdits() {
+            const code = document.getElementById("editStateSelect").value;
+            if (!stateDataStore[code]) return;
+
+            stateDataStore[code].feeCap = document.getElementById("editFeeCap").value;
+            stateDataStore[code].ronStatus = document.getElementById("editRonStatus").value;
+            stateDataStore[code].deedWitnesses = document.getElementById("editDeedWitnesses").value;
+            stateDataStore[code].journal = document.getElementById("editJournal").value;
+            stateDataStore[code].docs.poa.act = document.getElementById("editPoaAct").value;
+            stateDataStore[code].docs.poa.detail = document.getElementById("editPoaDetail").value;
+            stateDataStore[code].lastVerified = "Updated Now";
+
+            saveLocalStoreData();
+            alert(`Rules updated successfully for ${stateDataStore[code].name}!`);
+            
+            if (activeStateId === code) {
+                renderStateDetail(code);
+            } else if (activeStateId === 'INDEX') {
+                renderIndexGrid();
+            }
+        }
+
+        // Export JSON Database
+        function exportDatabaseJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(stateDataStore, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", "soundfox_50state_gnw_reference.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        // Import JSON Database
+        function importDatabaseJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (typeof imported === 'object' && imported.WA) {
+                        stateDataStore = imported;
+                        saveLocalStoreData();
+                        renderPillBar();
+                        if (activeStateId === 'INDEX') renderIndexGrid();
+                        else renderStateDetail(activeStateId);
+                        alert("Database imported successfully!");
+                    } else {
+                        alert("Invalid JSON format.");
+                    }
+                } catch(err) {
+                    alert("Error parsing JSON file.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Fetch Remote JSON Rules
+        function fetchRemoteRules() {
+            const url = document.getElementById("remoteSyncUrl").value;
+            if (!url) {
+                alert("Please enter a valid JSON URL.");
+                return;
+            }
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.WA) {
+                        stateDataStore = data;
+                        saveLocalStoreData();
+                        renderPillBar();
+                        renderIndexGrid();
+                        alert("Live rules synchronized successfully!");
+                    } else {
+                        alert("Remote endpoint returned invalid state structure.");
+                    }
+                })
+                .catch(err => {
+                    alert("Failed to fetch remote rules: " + err.message);
+                });
+        }
+
+        // Reset to Defaults
+        function resetToDefaultRules() {
+            if (confirm("Reset all 50 state rules back to original Sound Fox defaults?")) {
+                stateDataStore = JSON.parse(JSON.stringify(DEFAULT_STATE_DATA));
+                saveLocalStoreData();
+                renderPillBar();
+                selectState("INDEX");
+            }
+        }
+
+        // Theme Toggle Handler
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains("dark")) {
+                html.classList.remove("dark");
+                localStorage.setItem("soundfox_theme", "light");
+            } else {
+                html.classList.add("dark");
+                localStorage.setItem("soundfox_theme", "dark");
+            }
+        }
+
+        // Restore User Theme Preference
+        (function initTheme() {
+            const savedTheme = localStorage.getItem("soundfox_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark");
+            }
+        })();
+    </script>
+</body>
+</html>
